@@ -19,7 +19,7 @@ All notable changes to this project will be documented in this file. (format gui
 
 ---
 
-## [1.0.2] - 21-04-2025
+## [1.0.2](https://github.com/arnereabel/yaskawa_FP_120mm/compare/v1.0.1...v1.0.2) - 21-04-2025
 
 ### Changed
 -   Before the welding sequence, the job now constructs two temporary position variables, P003 and P004.
@@ -32,7 +32,7 @@ All notable changes to this project will be documented in this file. (format gui
 
 ---
 
-## [1.0.1] - 20-04-2025
+## [1.0.1](https://github.com/arnereabel/yaskawa_FP_120mm/compare/v1.0.0...v1.0.1) - 20-04-2025
 
 ### Changed
 -   TESTUF-ARNE.JBI now saves the positions captured by GETPOS PX124 STEP#(1) and GETPOS PX125 STEP#(2) into 
@@ -44,7 +44,7 @@ All notable changes to this project will be documented in this file. (format gui
 
 ---
 
-## [1.0.0] - 19-04-2025
+## [1.0.0](https://github.com/arnereabel/yaskawa_FP_120mm/releases/tag/v1.0.0) - 19-04-2025
 
 ### Added
 - Initial release of the project.
