@@ -10,6 +10,8 @@ All notable changes to this project will be documented in this file. (format gui
 
 ### Changed
 - Update to existing functionality.
+- set the pose for the `MULTILAYER-TESTAFLOOP-BOVEN.JBI` so it only uses the xyz from the points from UF.
+- create 4 points at start and end for both onder en boven layers to have a set start for run on, run off plates
 
 ### Fixed
 - Bug fix description (mention issue number if applicable, e.g., #123).
@@ -18,9 +20,13 @@ All notable changes to this project will be documented in this file. (format gui
 - Deprecated `old_function()` which is replaced by `new_module.better_function()`.
 
 ---
+## [1.0.3] - 21-04-2025
+### Changed
+-   Adjusted Z coordinate by -150mm for constructed weld start/end points (P003, P004) in `MULTILAYER-TESTAFLOOP-ONDER.JBI`, 
+    now the points from the userframe will be used to set the start values for `MULTILAYER-TESTAFLOOP-ONDER.JBI` and `MULTILAYER-TESTAFLOOP-BOVEN.JBI`,
+
 
 ## [1.0.2](https://github.com/arnereabel/yaskawa_FP_120mm/compare/v1.0.1...v1.0.2) - 21-04-2025
-
 ### Changed
 -   Before the welding sequence, the job now constructs two temporary position variables, P003 and P004.
     P003 (weld start) is created by combining the X, Y, Z coordinates from the global variable P001 (which holds the origin point captured in TESTUF-ARNE.JBI) with the Rx, Ry, Rz orientation from the original C00003 point defined within MULTILAYER-TESTAFLOOP-ONDER.JBI.
@@ -33,7 +39,6 @@ All notable changes to this project will be documented in this file. (format gui
 ---
 
 ## [1.0.1](https://github.com/arnereabel/yaskawa_FP_120mm/compare/v1.0.0...v1.0.1) - 20-04-2025
-
 ### Changed
 -   TESTUF-ARNE.JBI now saves the positions captured by GETPOS PX124 STEP#(1) and GETPOS PX125 STEP#(2) into 
     global Position Variables P001 and P002.

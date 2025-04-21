@@ -163,12 +163,13 @@ JUMP *LABEL
 GETE D001 P001 (1) ' Get X from P001 (TESTUF-ARNE Origin)
 GETE D002 P001 (2) ' Get Y from P001
 GETE D003 P001 (3) ' Get Z from P001
+SUB D003 150000 ' Adjust Z by -150mm (assuming 0.001mm units)
 GETE D004 C00003 (4) ' Get Rx from original C00003
 GETE D005 C00003 (5) ' Get Ry from original C00003
 GETE D006 C00003 (6) ' Get Rz from original C00003
 SETE P003 (1) D001
 SETE P003 (2) D002
-SETE P003 (3) D003
+SETE P003 (3) D003 ' Set adjusted Z
 SETE P003 (4) D004
 SETE P003 (5) D005
 SETE P003 (6) D006
@@ -176,12 +177,13 @@ SETE P003 (6) D006
 GETE D001 P002 (1) ' Get X from P002 (TESTUF-ARNE X-Axis Pt)
 GETE D002 P002 (2) ' Get Y from P002
 GETE D003 P002 (3) ' Get Z from P002
+SUB D003 150000 ' Adjust Z by -150mm (assuming 0.001mm units)
 GETE D004 C00004 (4) ' Get Rx from original C00004
 GETE D005 C00004 (5) ' Get Ry from original C00004
 GETE D006 C00004 (6) ' Get Rz from original C00004
 SETE P004 (1) D001
 SETE P004 (2) D002
-SETE P004 (3) D003
+SETE P004 (3) D003 ' Set adjusted Z
 SETE P004 (4) D004
 SETE P004 (5) D005
 SETE P004 (6) D006
