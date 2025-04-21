@@ -20,9 +20,9 @@ All notable changes to this project will be documented in this file. (format gui
 - Deprecated `old_function()` which is replaced by `new_module.better_function()`.
 
 ---
-## [1.0.3] - 21-04-2025
+## [1.0.3](https://github.com/arnereabel/yaskawa_FP_120mm/compare/v1.0.2...v1.0.3) - 21-04-2025
 ### Changed
--   Adjusted Z coordinate by -150mm for constructed weld start/end points (P003, P004) in `MULTILAYER-TESTAFLOOP-ONDER.JBI`, 
+-   Adjusted Z coordinate by -150mm for constructed weld start/end points (P003, P004) in `MULTILAYER-TESTAFLOOP-ONDER.JBI`,
     now the points from the userframe will be used to set the start values for `MULTILAYER-TESTAFLOOP-ONDER.JBI` and `MULTILAYER-TESTAFLOOP-BOVEN.JBI`,
 
 
