@@ -159,35 +159,51 @@ MACRO1 MJ#(2) ARGF1.2 ARGF1.5 ARGF25.0
 MACRO1 MJ#(1) ARGF0.0 ARGF10.0 ARGF-25.0 ARGF-10.0 ARGF0.0 ARGF0.0
 JUMP *LABEL
 *LABEL
-' Construct P003 (Weld Start) from P001 (XYZ) and C00003 (Orientation)
-GETE D001 P001 (1) ' Get X from P001 (TESTUF-ARNE Origin)
-GETE D002 P001 (2) ' Get Y from P001
-GETE D003 P001 (3) ' Get Z from P001
-SUB D003 150000 ' Adjust Z by -150mm (assuming 0.001mm units)
-GETE D004 C00003 (4) ' Get Rx from original C00003
-GETE D005 C00003 (5) ' Get Ry from original C00003
-GETE D006 C00003 (6) ' Get Rz from original C00003
-SETE P003 (1) D001
-SETE P003 (2) D002
-SETE P003 (3) D003 ' Set adjusted Z
-SETE P003 (4) D004
-SETE P003 (5) D005
-SETE P003 (6) D006
-' Construct P004 (Weld End) from P002 (XYZ) and C00004 (Orientation)
-GETE D001 P002 (1) ' Get X from P002 (TESTUF-ARNE X-Axis Pt)
-GETE D002 P002 (2) ' Get Y from P002
-GETE D003 P002 (3) ' Get Z from P002
-SUB D003 150000 ' Adjust Z by -150mm (assuming 0.001mm units)
-GETE D004 C00004 (4) ' Get Rx from original C00004
-GETE D005 C00004 (5) ' Get Ry from original C00004
-GETE D006 C00004 (6) ' Get Rz from original C00004
-SETE P004 (1) D001
-SETE P004 (2) D002
-SETE P004 (3) D003 ' Set adjusted Z
-SETE P004 (4) D004
-SETE P004 (5) D005
-SETE P004 (6) D006
+'--- Construct Dynamic Weld Start Point P003 ---
+' Purpose: Combine the TCP location (X,Y,Z) from the user frame setup (TESTUF-ARNE.JBI)
+'          with the specific torch orientation (Rx,Ry,Rz) defined for this layer (ONDER),
+'          and apply a Z-offset.
+' Get TCP coordinates (X,Y,Z) from P001 (set in TESTUF-ARNE.JBI from taught origin)
+GETE D001 P001 (1) ' Get X coordinate into D001
+GETE D002 P001 (2) ' Get Y coordinate into D002
+GETE D003 P001 (3) ' Get Z coordinate into D003
+' Apply Z-offset for this layer
+SUB D003 150000    ' Subtract 150mm (150000 * 0.001mm) from the Z coordinate
+' Get torch orientation (Rx,Ry,Rz) from the original taught point C00003 for this layer
+GETE D004 C00003 (4) ' Get Rx orientation into D004
+GETE D005 C00003 (5) ' Get Ry orientation into D005
+GETE D006 C00003 (6) ' Get Rz orientation into D006
+' Assemble the final P003 position variable
+SETE P003 (1) D001  ' Set X element of P003
+SETE P003 (2) D002  ' Set Y element of P003
+SETE P003 (3) D003  ' Set adjusted Z element of P003
+SETE P003 (4) D004  ' Set Rx element of P003
+SETE P003 (5) D005  ' Set Ry element of P003
+SETE P003 (6) D006  ' Set Rz element of P003
 
+'--- Construct Dynamic Weld End Point P004 ---
+' Purpose: Combine the TCP location (X,Y,Z) from the user frame setup (TESTUF-ARNE.JBI)
+'          with the specific torch orientation (Rx,Ry,Rz) defined for this layer (ONDER),
+'          and apply a Z-offset.
+' Get TCP coordinates (X,Y,Z) from P002 (set in TESTUF-ARNE.JBI from taught X-axis point)
+GETE D001 P002 (1) ' Get X coordinate into D001
+GETE D002 P002 (2) ' Get Y coordinate into D002
+GETE D003 P002 (3) ' Get Z coordinate into D003
+' Apply Z-offset for this layer
+SUB D003 150000    ' Subtract 150mm (150000 * 0.001mm) from the Z coordinate
+' Get torch orientation (Rx,Ry,Rz) from the original taught point C00004 for this layer
+GETE D004 C00004 (4) ' Get Rx orientation into D004
+GETE D005 C00004 (5) ' Get Ry orientation into D005
+GETE D006 C00004 (6) ' Get Rz orientation into D006
+' Assemble the final P004 position variable
+SETE P004 (1) D001  ' Set X element of P004
+SETE P004 (2) D002  ' Set Y element of P004
+SETE P004 (3) D003  ' Set adjusted Z element of P004
+SETE P004 (4) D004  ' Set Rx element of P004
+SETE P004 (5) D005  ' Set Ry element of P004
+SETE P004 (6) D006  ' Set Rz element of P004
+
+'--- Welding Sequence ---
 REFP 1 C00000
 REFP 2 C00001
 MOVJ C00002 T0000 VJ=50.00
