@@ -10,16 +10,16 @@
 ///LVARS 1,0,6,6,0,0,0,0
 NOP
 '################################
-'P-Variable definieren
-SET LB000 111
+'P-Variable defenition
+SET LB000 111 
 'Argumente einlesen
-GETARG LR000 IARG#(1)
+GETARG LR000 IARG#(1) 'x
 GETARG LR001 IARG#(2)
 GETARG LR002 IARG#(3)
 GETARG LR003 IARG#(4)
 GETARG LR004 IARG#(5)
 GETARG LR005 IARG#(6)
-'Verschiebung berechen
+'calculate shift
 MUL LR000 1000
 MUL LR001 1000
 MUL LR002 1000
@@ -32,13 +32,13 @@ SET LD002 LR002
 SET LD003 LR003
 SET LD004 LR004
 SET LD005 LR005
-'Verschiebung setzen in P-Variabl
+'set the shift in the p variable
 SETE P[LB000] (1) LD000
 SETE P[LB000] (2) LD001
 SETE P[LB000] (3) LD002
 SETE P[LB000] (4) LD003
 SETE P[LB000] (5) LD004
 SETE P[LB000] (6) LD005
-'Verschiebung einschalten
+'add the calculated shift
 SFTON P[LB000] UF#(15)
 END

@@ -20,6 +20,19 @@ All notable changes to this project will be documented in this file. (format gui
 - Deprecated `old_function()` which is replaced by `new_module.better_function()`.
 
 ---
+## [1.0.4](https://github.com/arnereabel/yaskawa_FP_120mm/compare/v1.0.3...v1.0.4) - 04-05-2025
+
+### Added
+- Initialized Memory Bank (`memory-bank/` directory) with core documentation files (`projectbrief.md`, `productContext.md`, `activeContext.md`, `systemPatterns.md`, `techContext.md`, `progress.md`).
+- Populated Memory Bank with detailed analysis of all core JBI files (`MASTER-START-ML.JBI`, `MULTILAYER-TESTAFLOOP-BOVEN.JBI`, `MULTILAYER-TESTAFLOOP-ONDER.JBI`, `SHIFT-R1.JBI`, `WEAVING.JBI`, `ESAB1JOB.JBI`, `VAN-BOVEN-NAAR-ONDER.JBI`, `VAN-ONDER-NAAR-BOVEN.JBI`, `TESTUF-ARNE.JBI`).
+- Included analysis insights from INFORM III manuals (Parts 1-6).
+- Added Mermaid diagram to `systemPatterns.md` visualizing program flow.
+
+### Changed
+- Updated Memory Bank based on user clarification that `DOUT OT#(46) ON` controls the cooling system.
+- Refined understanding of macro scaling factors and default welding conditions based on manual review.
+
+---
 ## [1.0.3](https://github.com/arnereabel/yaskawa_FP_120mm/compare/v1.0.2...v1.0.3) - 21-04-2025
 ### Changed
 -   Adjusted Z coordinate by -150mm for constructed weld start/end points (P003, P004) in `MULTILAYER-TESTAFLOOP-ONDER.JBI`,
