@@ -25,3 +25,4 @@ Transition Jobs: Dedicated jobs (VAN-BOVEN-NAAR-ONDER.JBI, VAN-ONDER-NAAR-BOVEN.
 Multi-Layer Capability: Logic to handle multiple weld layers, potentially involving macros for shifting (SHIFT-R1.JBI) or weaving (WEAVING.JBI).
 
 <img src="20250227_110620.jpg" alt="pe weld 1" width="300"> <img src="20250227_155734.jpg" alt="pe weld 1" width="300">
+<img src="20250401_120944.jpg" alt="pe weld 1" width="300">
