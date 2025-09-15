@@ -2,7 +2,10 @@
 
 Project Description :
 
+Integrated Robotic Automation Cell
+
 This project involves a Yaskawa robot program designed to perform a multi-layer weld on an X-seam configuration for a 120mm thick plate (presumably 60mm bevel with 40° angle on each side). 
+Fixture design, fabrication and integration made in house. 
 Specifically welding in PA and PE alternately to fill the groove with a 12.50 OK wire from esab for both positions.  
 The program utilizes several JBI files to manage different aspects of the process, including user frame definition, master control sequencing, welding operations for top and bottom sections, and transitions between these sections.
 Core task involves automating the welding process for this specific joint geometry.
@@ -24,5 +27,5 @@ Point Teaching/Detection: Functionality within the welding jobs to determine and
 Transition Jobs: Dedicated jobs (VAN-BOVEN-NAAR-ONDER.JBI, VAN-ONDER-NAAR-BOVEN.JBI) to manage the robot's movement between the upper and lower welding zones.
 Multi-Layer Capability: Logic to handle multiple weld layers, potentially involving macros for shifting (SHIFT-R1.JBI) or weaving (WEAVING.JBI).
 
-<img src="20250227_110620.jpg" alt="pe weld 1" width="300"> <img src="20250227_155734.jpg" alt="pe weld 1" width="300">
-<img src="20250401_120944.jpg" alt="pe weld 1" width="300">
+<img src="gifpe.gif" alt="pe weld 1"> <img src="20250227_110620.jpg" alt="pe weld 1" width="200"> <img src="20250227_155734.jpg" alt="pe weld 1" width="200">
+<img src="20250410_113051.jpg" alt="pe weld 1" width="200"> <img src="20250527_155637.jpg" alt="pe weld 1" width="200"> <img src="20250527_155655.jpg" alt="pe weld 1" width="200">  <img src="20250725_140210.jpg" alt="pe weld 1" height="600"> <img src="20250724_083316.jpg" alt="pe weld 1" wheight="600">
