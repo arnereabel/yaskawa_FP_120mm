@@ -20,6 +20,7 @@ NOP
 MOVL C00000 V=166.7  //ORG
 MOVL C00001 V=166.7  //XX
 PAUSE
+PAUSE
 GETPOS PX124 STEP#(1)
 GETPOS PX125 STEP#(2)
 'Store captured positions in global variables
