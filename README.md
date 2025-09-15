@@ -24,4 +24,4 @@ Point Teaching/Detection: Functionality within the welding jobs to determine and
 Transition Jobs: Dedicated jobs (VAN-BOVEN-NAAR-ONDER.JBI, VAN-ONDER-NAAR-BOVEN.JBI) to manage the robot's movement between the upper and lower welding zones.
 Multi-Layer Capability: Logic to handle multiple weld layers, potentially involving macros for shifting (SHIFT-R1.JBI) or weaving (WEAVING.JBI).
 
-<img src="20250227_110620.jpg" alt="My Project Logo" width="300">
+<img src="20250227_110620.jpg" alt="pe weld 1" width="300">
