@@ -53,5 +53,5 @@ VAN-ONDER-NAAR-BOVEN.JBI: Manages the robot's movement from the lower to the upp
 Implements logic to handle multiple weld layers, utilizing macros for path shifting (SHIFT-R1.JBI) and weaving (WEAVING.JBI).
 
 
-<img src="gifpe.gif" alt="pe weld 1"> <img src="assets_weldtest_jpg/20250227_110620.jpg" alt="pe weld 1" width="200"> <img src="20250227_155734.jpg" alt="pe weld 1" width="200">
+<img src="gifpe.gif" alt="pe weld 2"> <img src="assets_weldtest_jpg/20250227_110620.jpg" alt="pe weld 1" width="200"> <img src="20250227_155734.jpg" alt="pe weld 1" width="200">
 <img src="assets_weldtest_jpg/20250410_113051.jpg" alt="pe weld 1" width="200"> <img src="assets_weldtest_jpg/20250527_155637.jpg" alt="pe weld 1" width="200"> <img src="20250527_155655.jpg" alt="pe weld 1" width="200">  <img src="assets_weldtest_jpg/20250725_140210.jpg" alt="pe weld 1" height="600"> <img src="assets_weldtest_jpg/20250724_083316.jpg" alt="pe weld 1" wheight="600">
