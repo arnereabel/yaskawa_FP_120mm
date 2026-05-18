@@ -1,0 +1,82 @@
+/JOB
+//NAME X_ADD_SHIFT_TO_FILL_P60
+'============================================================
+'COMMENTED COPY - generated for program review
+'Original source: X_ADD_SHIFT_TO_FILL_P60.JBI
+'Purpose:
+'Moves the P060-P066 right fill path one calculated step by subtracting R040-R046 from each point's Y element.
+'This job mutates the P060-series positions in place, so repeated calls intentionally walk the fill path across the joint.
+'It uses the same R040-R046 values calculated by X_CALC_SHIFT.
+'============================================================
+///FOLDERNAME FOLDER015
+//POS
+///NPOS 0,0,0,7,0,0
+///USER 15
+///TOOL 1
+///POSTYPE USER
+///RECTAN
+///RCONF 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+P00060=-15.801,-4.843,32.979,147.0670,-3.3340,16.3411
+P00061=49.199,-4.843,32.979,147.0670,-3.3340,16.3411
+P00062=109.218,-4.397,34.226,147.0876,-3.3432,16.3482
+P00063=169.205,-2.508,34.773,147.0750,-3.3438,16.3344
+P00064=229.214,-3.073,36.451,147.0725,-3.3391,16.3445
+P00065=289.207,-2.636,35.555,147.0814,-3.3431,16.3373
+P00066=349.899,-1.698,34.877,147.0762,-3.3399,16.3474
+//INST
+///DATE 2026/05/05 18:20
+///ATTR SC,RW
+///GROUP1 RB1
+NOP
+'Program start.
+'0
+GETE D140 P060 (2)
+'Read element 2 from P060 into D140.
+SUB D140 R040
+'Subtract correction register R040 from D140.
+SETE P060 (2) D140
+'Write D140 back into element 2 of P060.
+'1
+GETE D141 P061 (2)
+'Read element 2 from P061 into D141.
+SUB D141 R041
+'Subtract correction register R041 from D141.
+SETE P061 (2) D141
+'Write D141 back into element 2 of P061.
+'2
+GETE D142 P062 (2)
+'Read element 2 from P062 into D142.
+SUB D142 R042
+'Subtract correction register R042 from D142.
+SETE P062 (2) D142
+'Write D142 back into element 2 of P062.
+'3
+GETE D143 P063 (2)
+'Read element 2 from P063 into D143.
+SUB D143 R043
+'Subtract correction register R043 from D143.
+SETE P063 (2) D143
+'Write D143 back into element 2 of P063.
+'4
+GETE D144 P064 (2)
+'Read element 2 from P064 into D144.
+SUB D144 R044
+'Subtract correction register R044 from D144.
+SETE P064 (2) D144
+'Write D144 back into element 2 of P064.
+'5
+GETE D145 P065 (2)
+'Read element 2 from P065 into D145.
+SUB D145 R045
+'Subtract correction register R045 from D145.
+SETE P065 (2) D145
+'Write D145 back into element 2 of P065.
+'L6
+GETE D146 P066 (2)
+'Read element 2 from P066 into D146.
+SUB D146 R046
+'Subtract correction register R046 from D146.
+SETE P066 (2) D146
+'Write D146 back into element 2 of P066.
+END
+'End of job.

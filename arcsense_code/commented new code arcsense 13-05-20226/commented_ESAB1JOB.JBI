@@ -1,0 +1,68 @@
+/JOB
+//NAME ESAB1JOB
+'============================================================
+'COMMENTED COPY - generated for program review
+'Original source: ESAB1JOB.JBI
+'Purpose:
+'This macro job receives weld job number 0 from MACRO1 MJ#(0) ARGF5.
+'It writes the requested ESAB weld job into MREG#188, verifies the source accepted it, then checks ESAB error inputs.
+'Called by search and fill jobs before welding/searching so the correct ESAB schedule is active.
+'============================================================
+//POS
+///NPOS 0,0,0,0,0,0
+//INST
+///DATE 2024/02/29 15:55
+///ATTR SC,RW,MC
+///LVARS 0,2,0,0,0,0,0,0
+NOP
+'Program start.
+'198002 HC ARC 1.4.0
+'221931 ESAB_EDGE 1.03
+*TOP
+'Label *TOP: section marker / jump target.
+'JOB SELECT
+GETARG LI000 IARG#(1)
+'Read the macro argument into a local integer variable.
+SETREG MREG#(188) LI000
+'Write a value to an ESAB communication register.
+'JOB EXISTS CHECK
+JUMP *JOBOK IF IN#(34)=ON
+TIMER T=0.20
+'Short delay for ESAB communication timing.
+GETREG LI001 MREG#(182)
+'Read back an ESAB communication register for confirmation.
+JUMP *JOBOK IF LI000=LI001
+SETREG MREG#(188) 0
+'Write a value to an ESAB communication register.
+TIMER T=0.20
+'Short delay for ESAB communication timing.
+SETREG MREG#(188) LI000
+'Write a value to an ESAB communication register.
+TIMER T=0.20
+'Short delay for ESAB communication timing.
+GETREG LI001 MREG#(182)
+'Read back an ESAB communication register for confirmation.
+JUMP *JOBOK IF LI000=LI001
+SETUALM 8000 "WELD JOB DO NOT EXIST" 1
+'Raise a user alarm if the requested ESAB weld job does not exist.
+JUMP *TOP
+*JOBOK
+'Label *JOBOK: section marker / jump target.
+'ERROR CHECK
+JUMP *END IFEXPRESS IN#(49)=OFF ANDEXP IN#(50)=OFF ANDEXP IN#(51)=OFF ANDEXP IN#(52)=OFF
+PULSE OT#(40) T=1.00
+'Pulse the specified output for ESAB error/alarm handling.
+WAIT FOREXPRESS IN#(49)=OFF ANDEXP IN#(50)=OFF ANDEXP IN#(51)=OFF ANDEXP IN#(52)=OFF T=2.00
+'Wait briefly for ESAB error inputs to clear.
+'TRIGGER WELD ALARM
+PULSE OT#(4092) T=0.50 IFEXPRESS IN#(49)=ON OREXP IN#(50)=ON OREXP IN#(51)=ON OREXP IN#(52)=ON
+'Pulse the specified output for ESAB error/alarm handling.
+*END
+'Label *END: section marker / jump target.
+JUMP *END2 IF IN#(34)=ON
+TIMER T=0.50
+'Short delay for ESAB communication timing.
+*END2
+'Label *END2: section marker / jump target.
+END
+'End of job.

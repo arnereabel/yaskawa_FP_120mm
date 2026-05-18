@@ -1,0 +1,99 @@
+/JOB
+//NAME X_RIGHT_SEARCH
+'============================================================
+'COMMENTED COPY - generated for program review
+'Original source: X_RIGHT_SEARCH.JBI
+'Purpose:
+'Right-side ComArc sensing pass. The caller sets shift registers, search parameters, and speed before calling.
+'The measured seam points are stored in base positions P011-P016 using GETS PX011-PX016 from $PX008.
+'These measured P010-series points are later converted to UF15 P060-series fill points.
+'============================================================
+///FOLDERNAME FOLDER014
+//POS
+///NPOS 2,0,0,9,0,0
+///USER 15
+///TOOL 1
+///POSTYPE USER
+///RECTAN
+///RCONF 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+C00000=0.001,0.000,200.000,151.8898,-4.7354,16.0007
+C00001=0.001,200.000,20.000,151.8898,-4.7354,16.0007
+P00041=0.000,0.000,100.000,161.2540,-8.5480,11.8141
+P00042=200.000,0.000,80.000,158.6835,-17.2011,12.3886
+P00070=0.000,0.000,0.000,151.8897,-4.7351,16.0007
+P00071=60.000,-0.003,0.002,151.8893,-4.7350,16.0007
+P00072=120.000,-0.003,0.002,151.8893,-4.7350,16.0007
+P00073=180.000,-0.003,0.002,151.8893,-4.7350,16.0007
+P00074=240.000,-0.003,0.002,151.8893,-4.7350,16.0007
+P00075=300.000,-0.003,0.002,151.8893,-4.7350,16.0007
+P00076=360.000,-0.003,0.002,151.8893,-4.7350,16.0007
+//INST
+///DATE 2026/05/13 16:25
+///COMM R2?
+///ATTR SC,RW,RJ
+////FRAME USER 15
+///GROUP1 RB1
+NOP
+'Program start.
+SFTOF
+'Cancel any active shift before moving or after welding.
+MACRO1 MJ#(0) ARGF5
+'Select ESAB weld job 0 through ESAB1JOB before continuing.
+DOUT OT#(46) ON
+'Turn output OT#46 ON for the welding/search process.
+SFTOF
+'Cancel any active shift before moving or after welding.
+MOVJ P041 VJ=10.00 ACC=20  //HOME
+'Move joint to home/safe position P041.
+CALL JOB:X_SHIFT-R1
+'Apply the caller-defined UF15 shift from R090-R095.
+MOVL P070 V=166.7 ACC=20
+'Linear move to path start point.
+'P080+200Z
+REFP 1 C00000
+'Set weaving/search reference point 1.
+'P080+200Y+20Z
+REFP 2 C00001
+'Set weaving/search reference point 2.
+CLRSENS
+'Clear previous sensor data before starting ComArc search.
+COMARCON AMP=D049 FREQ=2.5 ANGL=D048 U/D=I022 L/R=-0.5
+'Start ComArc sensing with the configured amplitude, frequency, angle, U/D and L/R values.
+ARCON
+'Turn arc on.
+MOVL P071 V=I021
+'Search along the next right sensing point using speed I021.
+GETS PX011 $PX008
+'Store the current sensed robot position from $PX008 into the target position variable.
+MOVL P072 V=I021
+'Search along the next right sensing point using speed I021.
+GETS PX012 $PX008
+'Store the current sensed robot position from $PX008 into the target position variable.
+MOVL P073 V=I021
+'Search along the next right sensing point using speed I021.
+GETS PX013 $PX008
+'Store the current sensed robot position from $PX008 into the target position variable.
+MOVL P074 V=I021
+'Search along the next right sensing point using speed I021.
+GETS PX014 $PX008
+'Store the current sensed robot position from $PX008 into the target position variable.
+MOVL P075 V=I021
+'Search along the next right sensing point using speed I021.
+GETS PX015 $PX008
+'Store the current sensed robot position from $PX008 into the target position variable.
+MOVL P076 V=I021
+'Search along the next right sensing point using speed I021.
+GETS PX016 $PX008
+'Store the current sensed robot position from $PX008 into the target position variable.
+COMARCOF
+'Stop ComArc sensing.
+ARCOF
+'Turn arc off.
+SFTOF
+'Cancel any active shift before moving or after welding.
+MOVL P042 V=83.3
+'Linear move to out/exit point P042.
+MOVJ P041 VJ=10.00 ACC=20
+'Move joint to home/safe position P041.
+END
+'End of job.

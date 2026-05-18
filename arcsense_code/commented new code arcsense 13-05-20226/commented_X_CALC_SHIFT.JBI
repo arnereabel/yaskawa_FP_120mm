@@ -1,0 +1,81 @@
+/JOB
+//NAME X_CALC_SHIFT
+'============================================================
+'COMMENTED COPY - generated for program review
+'Original source: X_CALC_SHIFT.JBI
+'Purpose:
+'Calculates seven Y-axis fill increments from the distance between right measured points P010-P016 and left measured points P020-P026.
+'Caller sets I010 to the number of spaces/layers used to divide the gap.
+'Results are stored in R040-R046 and later applied to P030/P060 fill points.
+'============================================================
+///FOLDERNAME FOLDER015
+//POS
+///NPOS 0,0,0,14,0,0
+///TOOL 1
+///POSTYPE BASE
+///RECTAN
+///RCONF 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+P00010=764.973,126.622,533.783,146.7669,-4.1359,20.4841
+P00011=764.973,126.622,533.783,146.7669,-4.1359,20.4841
+P00012=824.774,131.462,535.924,146.7874,-4.1451,20.4912
+P00013=884.468,137.472,537.363,146.7750,-4.1458,20.4774
+P00014=944.379,140.558,539.936,146.7723,-4.1410,20.4875
+P00015=1004.172,145.579,539.934,146.7813,-4.1451,20.4803
+P00016=1064.702,150.066,540.160,146.7760,-4.1418,20.4904
+P00020=762.418,163.156,531.591,176.0939,-11.8310,16.7664
+P00021=762.418,163.156,531.591,176.0939,-11.8310,16.7664
+P00022=822.187,167.796,531.687,176.0718,-11.8174,16.7707
+P00023=881.772,174.277,534.236,176.0915,-11.8113,16.7809
+P00024=941.716,179.033,536.102,176.0853,-11.8317,16.7621
+P00025=1001.407,183.374,537.332,176.0782,-11.8155,16.7841
+P00026=1061.824,189.896,539.820,176.0854,-11.8221,16.7623
+//INST
+///DATE 2026/05/06 12:49
+///ATTR SC,RW
+///GROUP1 RB1
+NOP
+'Program start.
+GETE D040 P010 (2)
+'Read element 2 from P010 into D040.
+GETE D050 P020 (2)
+'Read element 2 from P020 into D050.
+SET R040  EXPRESS ( D050 - D040 ) / -I010
+'Calculate one per-point Y correction value for the fill path.
+GETE D041 P011 (2)
+'Read element 2 from P011 into D041.
+GETE D051 P021 (2)
+'Read element 2 from P021 into D051.
+SET R041  EXPRESS ( D051 - D041 ) / -I010
+'Calculate one per-point Y correction value for the fill path.
+GETE D042 P012 (2)
+'Read element 2 from P012 into D042.
+GETE D052 P022 (2)
+'Read element 2 from P022 into D052.
+SET R042  EXPRESS ( D052 - D042 ) / -I010
+'Calculate one per-point Y correction value for the fill path.
+GETE D043 P013 (2)
+'Read element 2 from P013 into D043.
+GETE D053 P023 (2)
+'Read element 2 from P023 into D053.
+SET R043  EXPRESS ( D053 - D043 ) / -I010
+'Calculate one per-point Y correction value for the fill path.
+GETE D044 P014 (2)
+'Read element 2 from P014 into D044.
+GETE D054 P024 (2)
+'Read element 2 from P024 into D054.
+SET R044  EXPRESS ( D054 - D044 ) / -I010
+'Calculate one per-point Y correction value for the fill path.
+GETE D045 P015 (2)
+'Read element 2 from P015 into D045.
+GETE D055 P025 (2)
+'Read element 2 from P025 into D055.
+SET R045  EXPRESS ( D055 - D045 ) / -I010
+'Calculate one per-point Y correction value for the fill path.
+GETE D046 P016 (2)
+'Read element 2 from P016 into D046.
+GETE D056 P026 (2)
+'Read element 2 from P026 into D056.
+SET R046  EXPRESS ( D056 - D046 ) / -I010
+'Calculate one per-point Y correction value for the fill path.
+END
+'End of job.

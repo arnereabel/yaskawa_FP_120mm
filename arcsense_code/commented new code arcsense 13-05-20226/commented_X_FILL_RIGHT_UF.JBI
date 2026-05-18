@@ -1,0 +1,85 @@
+/JOB
+//NAME X_FILL_RIGHT_UF
+'============================================================
+'COMMENTED COPY - generated for program review
+'Original source: X_FILL_RIGHT_UF.JBI
+'Purpose:
+'Welds the current right UF15 fill path P060-P066.
+'Caller sets R090-R095 for torch/path shift, D039 for weld event, and I018 for weld travel speed.
+'The job selects ESAB job 0, enables OT#46, applies the UF15 shift through X_SHIFT-R1, welds P060-P066, then returns home.
+'============================================================
+///FOLDERNAME FOLDER014
+//POS
+///NPOS 2,0,0,9,0,0
+///USER 15
+///TOOL 1
+///POSTYPE USER
+///RECTAN
+///RCONF 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+C00000=0.000,-2.000,100.000,170.3481,-7.9751,6.9315
+C00001=0.000,-100.000,5.000,170.3481,-7.9751,6.9315
+P00041=0.000,0.000,100.000,161.2540,-8.5480,11.8141
+P00042=200.000,0.000,80.000,158.6835,-17.2011,12.3886
+P00060=-15.801,-4.843,32.979,147.0670,-3.3340,16.3411
+P00061=49.199,-4.843,32.979,147.0670,-3.3340,16.3411
+P00062=109.218,-4.397,34.226,147.0876,-3.3432,16.3482
+P00063=169.205,-2.508,34.773,147.0750,-3.3438,16.3344
+P00064=229.214,-3.073,36.451,147.0725,-3.3391,16.3445
+P00065=289.207,-2.636,35.555,147.0814,-3.3431,16.3373
+P00066=349.899,-1.698,34.877,147.0762,-3.3399,16.3474
+//INST
+///DATE 2026/05/13 15:26
+///COMM R2?
+///ATTR SC,RW,RJ
+////FRAME USER 15
+///GROUP1 RB1
+NOP
+'Program start.
+SFTOF
+'Cancel any active shift before moving or after welding.
+MACRO1 MJ#(0) ARGF5
+'Select ESAB weld job 0 through ESAB1JOB before continuing.
+DOUT OT#(46) ON
+'Turn output OT#46 ON for the welding/search process.
+SFTOF
+'Cancel any active shift before moving or after welding.
+MOVJ P041 VJ=10.00 ACC=20  //HOME
+'Move joint to home/safe position P041.
+CALL JOB:X_SHIFT-R1
+'Apply the caller-defined UF15 shift from R090-R095.
+MOVL P060 V=166.7 ACC=20  //startpoint
+'Linear move to path start point.
+REFP 1 C00000
+'Set weaving/search reference point 1.
+REFP 2 C00001
+'Set weaving/search reference point 2.
+ARCON
+'Turn arc on.
+WVON WEV#(D039)
+'Enable weave/weld event using D039.
+MOVL P061 V=I018
+'Weld along the next right fill path point using speed I018.
+MOVL P062 V=I018
+'Weld along the next right fill path point using speed I018.
+MOVL P063 V=I018
+'Weld along the next right fill path point using speed I018.
+MOVL P064 V=I018
+'Weld along the next right fill path point using speed I018.
+MOVL P065 V=I018
+'Weld along the next right fill path point using speed I018.
+MOVL P066 V=I018
+'Weld along the next right fill path point using speed I018.
+ARCOF
+'Turn arc off.
+WVOF
+'Disable weave/weld event.
+SFTOF
+'Cancel any active shift before moving or after welding.
+MOVL P042 V=83.3  //OUT
+'Linear move to out/exit point P042.
+DOUT OT#(46) OFF
+'Turn output OT#46 OFF after the process is complete.
+MOVJ P041 VJ=10.00 ACC=20  //HOME
+'Move joint to home/safe position P041.
+END
+'End of job.

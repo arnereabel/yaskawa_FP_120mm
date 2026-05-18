@@ -1,0 +1,82 @@
+/JOB
+//NAME X_ADD_SHIFT_TO_FILL_P30
+'============================================================
+'COMMENTED COPY - generated for program review
+'Original source: X_ADD_SHIFT_TO_FILL_P30.JBI
+'Purpose:
+'Moves the P030-P036 left fill path one calculated step by adding R040-R046 to each point's Y element.
+'This job mutates the P030-series positions in place, so repeated calls intentionally walk the fill path across the joint.
+'I011 has been removed; the correction registers are used directly.
+'============================================================
+///FOLDERNAME FOLDER015
+//POS
+///NPOS 0,0,0,7,0,0
+///USER 15
+///TOOL 1
+///POSTYPE USER
+///RECTAN
+///RCONF 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+P00030=-15.755,2.554,30.825,176.3455,-11.0113,12.5931
+P00031=49.245,2.554,30.825,176.3455,-11.0113,12.5931
+P00032=109.188,2.965,30.028,176.3235,-10.9977,12.5975
+P00033=169.116,4.955,31.687,176.3433,-10.9916,12.6077
+P00034=229.268,4.718,32.657,176.3368,-11.0120,12.5888
+P00035=289.128,5.027,32.995,176.3300,-10.9959,12.6109
+P00036=349.888,6.372,34.580,176.3369,-11.0024,12.5891
+//INST
+///DATE 2026/05/06 16:03
+///ATTR SC,RW
+///GROUP1 RB1
+NOP
+'Program start.
+'0
+GETE D130 P030 (2)
+'Read element 2 from P030 into D130.
+ADD D130 R040
+'Add correction register R040 to D130.
+SETE P030 (2) D130
+'Write D130 back into element 2 of P030.
+'1
+GETE D131 P031 (2)
+'Read element 2 from P031 into D131.
+ADD D131 R041
+'Add correction register R041 to D131.
+SETE P031 (2) D131
+'Write D131 back into element 2 of P031.
+'2
+GETE D132 P032 (2)
+'Read element 2 from P032 into D132.
+ADD D132 R042
+'Add correction register R042 to D132.
+SETE P032 (2) D132
+'Write D132 back into element 2 of P032.
+'3
+GETE D133 P033 (2)
+'Read element 2 from P033 into D133.
+ADD D133 R043
+'Add correction register R043 to D133.
+SETE P033 (2) D133
+'Write D133 back into element 2 of P033.
+'4
+GETE D134 P034 (2)
+'Read element 2 from P034 into D134.
+ADD D134 R044
+'Add correction register R044 to D134.
+SETE P034 (2) D134
+'Write D134 back into element 2 of P034.
+'5
+GETE D135 P035 (2)
+'Read element 2 from P035 into D135.
+ADD D135 R045
+'Add correction register R045 to D135.
+SETE P035 (2) D135
+'Write D135 back into element 2 of P035.
+'6
+GETE D136 P036 (2)
+'Read element 2 from P036 into D136.
+ADD D136 R046
+'Add correction register R046 to D136.
+SETE P036 (2) D136
+'Write D136 back into element 2 of P036.
+END
+'End of job.

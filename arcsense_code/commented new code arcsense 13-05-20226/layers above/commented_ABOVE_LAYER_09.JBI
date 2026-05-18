@@ -1,0 +1,141 @@
+/JOB
+//NAME ABOVE_LAYER_09
+'============================================================
+'COMMENTED COPY - generated for program review
+'Original source: layers above\ABOVE_LAYER_09.JBI
+'Purpose:
+'Layer orchestration job for above layer 09.
+'Sets shift, ComArc, weld event, and speed values, then calls reusable search/convert/fill jobs.
+'Assumes R094/R095 are 0 and shared fill positions/registers retain the intended values between layer jobs.
+'============================================================
+///FOLDERNAME FOLDER017
+//POS
+///NPOS 0,0,0,0,0,0
+//INST
+///DATE 2026/05/13 16:41
+///ATTR SC,RW
+///GROUP1 RB1
+NOP
+'Program start.
+*AL9B1L1
+'Label *AL9B1L1: section marker / jump target.
+SET R090 -10
+'Set X shift R090 to -10 mm for the next search/fill path.
+SET R091 15
+'Set Y shift R091 to 15 mm for the next search/fill path.
+SET R092 28
+'Set Z shift R092 to 28 mm for the next search/fill path.
+SET R093 5
+'Set Rx shift R093 to 5 degrees for torch angle correction.
+SET D048 150
+'Set ComArc search angle D048 to 150.
+SET D049 6
+'Set ComArc search amplitude D049 to 6.
+SET I020 55
+'Set left search travel speed I020 to 55.
+SET I022 190
+'Set ComArc U/D parameter I022 to 190 for search jobs.
+CALL JOB:X_LEFT_SEARCH
+'Run the left ComArc search and store measured points in P021-P026.
+*AL9B2R1
+'Label *AL9B2R1: section marker / jump target.
+SET R090 -10
+'Set X shift R090 to -10 mm for the next search/fill path.
+SET R091 -15
+'Set Y shift R091 to -15 mm for the next search/fill path.
+SET R092 28
+'Set Z shift R092 to 28 mm for the next search/fill path.
+SET R093 -5
+'Set Rx shift R093 to -5 degrees for torch angle correction.
+SET D048 250
+'Set ComArc search angle D048 to 250.
+SET D049 6
+'Set ComArc search amplitude D049 to 6.
+SET I021 55
+'Set right search travel speed I021 to 55.
+SET I022 190
+'Set ComArc U/D parameter I022 to 190 for search jobs.
+CALL JOB:X_RIGHT_SEARCH
+'Run the right ComArc search and store measured points in P011-P016.
+*AL9B3L2
+'Label *AL9B3L2: section marker / jump target.
+CALL JOB:X_CONVERT_P020_TO_P30_UF15
+'Convert left measured base points P020-P026 into UF15 fill points P030-P036.
+CALL JOB:X_CONVERT_P010_TO_P60_UF15
+'Convert right measured base points P010-P016 into UF15 fill points P060-P066.
+SET I010 5
+'Set divisor I010 to 5 for X_CALC_SHIFT fill-spacing calculation.
+CALL JOB:X_CALC_SHIFT
+'Calculate R040-R046 fill spacing from the measured left/right point gap.
+CALL JOB:X_ADD_SHIFT_TO_FILL_P30
+'Advance P030-P036 one calculated Y step toward the fill area.
+CALL JOB:X_ADD_SHIFT_TO_FILL_P60
+'Advance P060-P066 one calculated Y step toward the fill area.
+SET R090 5
+'Set X shift R090 to 5 mm for the next search/fill path.
+SET R091 0
+'Set Y shift R091 to 0 mm for the next search/fill path.
+SET R092 0
+'Set Z shift R092 to 0 mm for the next search/fill path.
+SET R093 -10
+'Set Rx shift R093 to -10 degrees for torch angle correction.
+SET D039 2
+'Set weld event number D039 to 2 for WVON WEV#(D039).
+SET I019 55
+'Set left fill weld speed I019 to 55.
+CALL JOB:X_FILL_LEFT_UF
+'Weld the active left fill path P030-P036 using the current shift and weld event.
+*AL9B4R2
+'Label *AL9B4R2: section marker / jump target.
+SET R090 5
+'Set X shift R090 to 5 mm for the next search/fill path.
+SET R091 0
+'Set Y shift R091 to 0 mm for the next search/fill path.
+SET R092 0
+'Set Z shift R092 to 0 mm for the next search/fill path.
+SET R093 5
+'Set Rx shift R093 to 5 degrees for torch angle correction.
+SET D039 2
+'Set weld event number D039 to 2 for WVON WEV#(D039).
+SET I018 55
+'Set right fill weld speed I018 to 55.
+CALL JOB:X_FILL_RIGHT_UF
+'Weld the active right fill path P060-P066 using the current shift and weld event.
+CALL JOB:X_ADD_SHIFT_TO_FILL_P30
+'Advance P030-P036 one calculated Y step toward the fill area.
+*AL9B5L3
+'Label *AL9B5L3: section marker / jump target.
+SET R090 5
+'Set X shift R090 to 5 mm for the next search/fill path.
+SET R091 0
+'Set Y shift R091 to 0 mm for the next search/fill path.
+SET R092 0
+'Set Z shift R092 to 0 mm for the next search/fill path.
+SET R093 -10
+'Set Rx shift R093 to -10 degrees for torch angle correction.
+SET D039 2
+'Set weld event number D039 to 2 for WVON WEV#(D039).
+SET I019 55
+'Set left fill weld speed I019 to 55.
+CALL JOB:X_FILL_LEFT_UF
+'Weld the active left fill path P030-P036 using the current shift and weld event.
+CALL JOB:X_ADD_SHIFT_TO_FILL_P60
+'Advance P060-P066 one calculated Y step toward the fill area.
+SET R090 5
+'Set X shift R090 to 5 mm for the next search/fill path.
+*AL9B6R3
+'Label *AL9B6R3: section marker / jump target.
+SET R091 0
+'Set Y shift R091 to 0 mm for the next search/fill path.
+SET R092 0
+'Set Z shift R092 to 0 mm for the next search/fill path.
+SET R093 5
+'Set Rx shift R093 to 5 degrees for torch angle correction.
+SET D039 2
+'Set weld event number D039 to 2 for WVON WEV#(D039).
+SET I018 55
+'Set right fill weld speed I018 to 55.
+CALL JOB:X_FILL_RIGHT_UF
+'Weld the active right fill path P060-P066 using the current shift and weld event.
+END
+'End of job.

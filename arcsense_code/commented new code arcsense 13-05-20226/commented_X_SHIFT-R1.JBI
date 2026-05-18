@@ -1,0 +1,204 @@
+/JOB
+//NAME X_SHIFT-R1
+'============================================================
+'COMMENTED COPY - generated for program review
+'Original source: X_SHIFT-R1.JBI
+'Purpose:
+'Generic UF15 shift helper. Calling jobs must set R090-R095 before calling this job.
+'R090/R091/R092 are X/Y/Z millimeter shifts; R093/R094/R095 are Rx/Ry/Rz degree shifts.
+'The job validates limits, converts values to internal position units, writes P111, then enables SFTON P111 in UF#15.
+'============================================================
+///FOLDERNAME FOLDER015
+//POS
+///NPOS 0,0,0,0,0,0
+//INST
+///DATE 2026/05/13 16:15
+///COMM
+///ATTR SC,RW
+///GROUP1 RB1
+///LVARS 1,0,6,6,0,0,0,0
+NOP
+'Program start.
+'################################
+'P-Variable definition
+SET LB000 111
+'Input values:
+'R90=X R91=Y R92=Z
+'R93=Rx R94=Ry R95=Rz
+'XYZ in mm, angles in deg
+*CHECK
+'Label *CHECK: section marker / jump target.
+'Check X +/-50mm
+JUMP *ERR_XP IF R090>50
+'Check shift limit and jump to the relevant error handler if exceeded.
+JUMP *ERR_XM IF R090<-50
+'Check shift limit and jump to the relevant error handler if exceeded.
+'Check Y +/-50mm
+JUMP *ERR_YP IF R091>50
+'Check shift limit and jump to the relevant error handler if exceeded.
+JUMP *ERR_YM IF R091<-50
+'Check shift limit and jump to the relevant error handler if exceeded.
+'Check Z +/-50mm
+JUMP *ERR_ZP IF R092>50
+'Check shift limit and jump to the relevant error handler if exceeded.
+JUMP *ERR_ZM IF R092<-50
+'Check shift limit and jump to the relevant error handler if exceeded.
+'Check Rx +/-10deg
+JUMP *ERR_RXP IF R093>15
+'Check shift limit and jump to the relevant error handler if exceeded.
+JUMP *ERR_RXM IF R093<-15
+'Check shift limit and jump to the relevant error handler if exceeded.
+'Check Ry +/-10deg
+JUMP *ERR_RYP IF R094>10
+'Check shift limit and jump to the relevant error handler if exceeded.
+JUMP *ERR_RYM IF R094<-10
+'Check shift limit and jump to the relevant error handler if exceeded.
+'Check Rz +/-10deg
+JUMP *ERR_RZP IF R095>10
+'Check shift limit and jump to the relevant error handler if exceeded.
+JUMP *ERR_RZM IF R095<-10
+'Check shift limit and jump to the relevant error handler if exceeded.
+'Copy input values
+SET LR000 R090
+SET LR001 R091
+SET LR002 R092
+SET LR003 R093
+SET LR004 R094
+SET LR005 R095
+'Calculate internal units
+MUL LR000 1000
+MUL LR001 1000
+MUL LR002 1000
+MUL LR003 10000
+MUL LR004 10000
+MUL LR005 10000
+'Copy to double vars
+SET LD000 LR000
+SET LD001 LR001
+SET LD002 LR002
+SET LD003 LR003
+SET LD004 LR004
+SET LD005 LR005
+'Set shift in P111
+SETE P[LB000] (1) LD000
+SETE P[LB000] (2) LD001
+SETE P[LB000] (3) LD002
+SETE P[LB000] (4) LD003
+SETE P[LB000] (5) LD004
+SETE P[LB000] (6) LD005
+'Shift on in UF15
+SFTON P[LB000] UF#(15)
+'Enable the calculated shift in User Frame 15.
+JUMP *FINISH
+*ERR_XP
+'Label *ERR_XP: section marker / jump target.
+SFTOF
+'Cancel any active shift before moving or after welding.
+MSG "R90 X TOO HIGH"
+'Display an operator message for a shift-limit error.
+PAUSE
+'Pause so the operator can correct the out-of-range value.
+JUMP *CHECK
+*ERR_XM
+'Label *ERR_XM: section marker / jump target.
+SFTOF
+'Cancel any active shift before moving or after welding.
+MSG "R90 X TOO LOW"
+'Display an operator message for a shift-limit error.
+PAUSE
+'Pause so the operator can correct the out-of-range value.
+JUMP *CHECK
+*ERR_YP
+'Label *ERR_YP: section marker / jump target.
+SFTOF
+'Cancel any active shift before moving or after welding.
+MSG "R91 Y TOO HIGH"
+'Display an operator message for a shift-limit error.
+PAUSE
+'Pause so the operator can correct the out-of-range value.
+JUMP *CHECK
+*ERR_YM
+'Label *ERR_YM: section marker / jump target.
+SFTOF
+'Cancel any active shift before moving or after welding.
+MSG "R91 Y TOO LOW"
+'Display an operator message for a shift-limit error.
+PAUSE
+'Pause so the operator can correct the out-of-range value.
+JUMP *CHECK
+*ERR_ZP
+'Label *ERR_ZP: section marker / jump target.
+SFTOF
+'Cancel any active shift before moving or after welding.
+MSG "R92 Z TOO HIGH"
+'Display an operator message for a shift-limit error.
+PAUSE
+'Pause so the operator can correct the out-of-range value.
+JUMP *CHECK
+*ERR_ZM
+'Label *ERR_ZM: section marker / jump target.
+SFTOF
+'Cancel any active shift before moving or after welding.
+MSG "R92 Z TOO LOW"
+'Display an operator message for a shift-limit error.
+PAUSE
+'Pause so the operator can correct the out-of-range value.
+JUMP *CHECK
+*ERR_RXP
+'Label *ERR_RXP: section marker / jump target.
+SFTOF
+'Cancel any active shift before moving or after welding.
+MSG "R93 RX TOO HIGH"
+'Display an operator message for a shift-limit error.
+PAUSE
+'Pause so the operator can correct the out-of-range value.
+JUMP *CHECK
+*ERR_RXM
+'Label *ERR_RXM: section marker / jump target.
+SFTOF
+'Cancel any active shift before moving or after welding.
+MSG "R93 RX TOO LOW"
+'Display an operator message for a shift-limit error.
+PAUSE
+'Pause so the operator can correct the out-of-range value.
+JUMP *CHECK
+*ERR_RYP
+'Label *ERR_RYP: section marker / jump target.
+SFTOF
+'Cancel any active shift before moving or after welding.
+MSG "R94 RY TOO HIGH"
+'Display an operator message for a shift-limit error.
+PAUSE
+'Pause so the operator can correct the out-of-range value.
+JUMP *CHECK
+*ERR_RYM
+'Label *ERR_RYM: section marker / jump target.
+SFTOF
+'Cancel any active shift before moving or after welding.
+MSG "R94 RY TOO LOW"
+'Display an operator message for a shift-limit error.
+PAUSE
+'Pause so the operator can correct the out-of-range value.
+JUMP *CHECK
+*ERR_RZP
+'Label *ERR_RZP: section marker / jump target.
+SFTOF
+'Cancel any active shift before moving or after welding.
+MSG "R95 RZ TOO HIGH"
+'Display an operator message for a shift-limit error.
+PAUSE
+'Pause so the operator can correct the out-of-range value.
+JUMP *CHECK
+*ERR_RZM
+'Label *ERR_RZM: section marker / jump target.
+SFTOF
+'Cancel any active shift before moving or after welding.
+MSG "R95 RZ TOO LOW"
+'Display an operator message for a shift-limit error.
+PAUSE
+'Pause so the operator can correct the out-of-range value.
+JUMP *CHECK
+*FINISH
+'Label *FINISH: section marker / jump target.
+END
+'End of job.

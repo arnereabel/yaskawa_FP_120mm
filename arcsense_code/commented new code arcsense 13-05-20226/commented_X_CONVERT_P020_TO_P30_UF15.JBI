@@ -1,0 +1,51 @@
+/JOB
+//NAME X_CONVERT_P020_TO_P30_UF15
+'============================================================
+'COMMENTED COPY - generated for program review
+'Original source: X_CONVERT_P020_TO_P30_UF15.JBI
+'Purpose:
+'Converts the left measured base points P020-P026 into UF15 fill path points P030-P036.
+'P020 is set equal to P021 first so the path has a stable start point matching the first sensed point.
+'P030 X is adjusted by -65000 internal units after conversion, matching the original program convention.
+'============================================================
+///FOLDERNAME FOLDER015
+//POS
+///NPOS 0,0,0,3,0,0
+///TOOL 1
+///POSTYPE BASE
+///RECTAN
+///RCONF 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+P00020=762.418,163.156,531.591,176.0939,-11.8310,16.7664
+P00021=762.418,163.156,531.591,176.0939,-11.8310,16.7664
+///USER 15
+///POSTYPE USER
+P00030=-15.755,2.554,30.825,176.3455,-11.0113,12.5931
+//INST
+///DATE 2026/05/12 13:02
+///ATTR SC,RW
+///GROUP1 RB1
+NOP
+'Program start.
+SET P020 P021
+'Copy P021 into P020 before conversion.
+CNVRT PX030 PX020 UF#(15) TL#(1)
+'Convert PX020 into PX030 in User Frame 15 with Tool 1.
+CNVRT PX031 PX021 UF#(15) TL#(1)
+'Convert PX021 into PX031 in User Frame 15 with Tool 1.
+CNVRT PX032 PX022 UF#(15) TL#(1)
+'Convert PX022 into PX032 in User Frame 15 with Tool 1.
+CNVRT PX033 PX023 UF#(15) TL#(1)
+'Convert PX023 into PX033 in User Frame 15 with Tool 1.
+CNVRT PX034 PX024 UF#(15) TL#(1)
+'Convert PX024 into PX034 in User Frame 15 with Tool 1.
+CNVRT PX035 PX025 UF#(15) TL#(1)
+'Convert PX025 into PX035 in User Frame 15 with Tool 1.
+CNVRT PX036 PX026 UF#(15) TL#(1)
+'Convert PX026 into PX036 in User Frame 15 with Tool 1.
+GETE D137 P030 (1)
+'Read element 1 from P030 into D137.
+ADD D137 -65000
+SETE P030 (1) D137
+'Write D137 back into element 1 of P030.
+END
+'End of job.
